@@ -2,6 +2,10 @@
  * Mock API module for blueprint operations.
  * Provides simulated data for testing the frontend without backend dependencies.
  *
+ * @author Jesús Pinzón & David Velásquez
+ * @version 1.0
+ * @since 2025-10-02
+ *
  * @module apimock
  */
 var apimock = (function() {
