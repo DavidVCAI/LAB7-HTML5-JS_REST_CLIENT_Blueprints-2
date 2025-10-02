@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Blueprints</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <!-- jQuery -->
+        <script src="/webjars/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Blueprints Management</h1>
+
+            <!-- Author input section -->
+            <div class="form-group">
+                <label for="authorInput">Author:</label>
+                <input type="text" class="form-control" id="authorInput" placeholder="Enter author name">
+            </div>
+
+            <button class="btn btn-primary" id="getBlueprintsBtn">Get blueprints</button>
+
+            <!-- Author name display -->
+            <div id="authorNameDisplay" style="margin-top: 20px;"></div>
+
+            <!-- Blueprints table -->
+            <div style="margin-top: 20px;">
+                <table class="table table-bordered" id="blueprintsTable">
+                    <thead>
+                    <tr>
+                        <th>Blueprint name</th>
+                        <th>Number of points</th>
+                        <th>Open</th>
+                    </tr>
+                    </thead>
+                    <tbody id="blueprintsTableBody">
+                    <!-- Rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total points display -->
+            <div id="totalPointsDisplay" style="margin-top: 10px; font-weight: bold;"></div>
+        </div>
+
+        <!-- JavaScript modules -->
+        <script src="js/apimock.js"></script>
+        <script src="js/app.js"></script>
+
+    </body>
+</html>
