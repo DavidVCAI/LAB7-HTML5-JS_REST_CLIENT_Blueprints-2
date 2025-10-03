@@ -1,57 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Blueprints</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<head>
+    <title>Blueprints</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- jQuery -->
-        <script src="/webjars/jquery/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
-        <!-- Bootstrap JS -->
-        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Blueprints Management</h1>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
 
-            <!-- Author input section -->
-            <div class="form-group">
-                <label for="authorInput">Author:</label>
-                <input type="text" class="form-control" id="authorInput" placeholder="Enter author name">
-            </div>
+    <!-- jQuery -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
 
-            <button class="btn btn-primary" id="getBlueprintsBtn">Get blueprints</button>
+    <!-- Bootstrap JS -->
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-            <!-- Author name display -->
-            <div id="authorNameDisplay" style="margin-top: 20px;"></div>
-
-            <!-- Blueprints table -->
-            <div style="margin-top: 20px;">
-                <table class="table table-bordered" id="blueprintsTable">
-                    <thead>
-                    <tr>
-                        <th>Blueprint name</th>
-                        <th>Number of points</th>
-                        <th>Open</th>
-                    </tr>
-                    </thead>
-                    <tbody id="blueprintsTableBody">
-                    <!-- Rows will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Total points display -->
-            <div id="totalPointsDisplay" style="margin-top: 10px; font-weight: bold;"></div>
+<body>
+    <div class="container-fluid">
+        <!-- Main Title -->
+        <div class="header">
+            <h1 class="main-title">Blueprints</h1>
         </div>
 
-        <!-- JavaScript modules -->
-        <script src="js/apimock.js"></script>
-        <script src="js/app.js"></script>
+        <!-- Search Row -->
+        <div class="search-row">
+            <label class="author-label">Author</label>
+            <input type="text" class="author-input" id="authorInput" placeholder="JohnConnor">
+            <button class="get-blueprints-btn" id="getBlueprintsBtn">Get blueprints</button>
+        </div>
 
-    </body>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Column: Blueprints Table -->
+            <div class="left-column">
+                <div id="authorNameDisplay" class="author-subtitle"></div>
+
+                <div class="table-container" id="tableContainer" style="display: none;">
+                    <table class="blueprints-table" id="blueprintsTable">
+                        <thead>
+                            <tr>
+                                <th>Blueprint name</th>
+                                <th>Number of points</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="blueprintsTableBody">
+                            <!-- Rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+
+                    <div id="totalPointsDisplay" class="total-points"></div>
+                </div>
+            </div>
+
+            <!-- Right Column: Blueprint Canvas -->
+            <div class="right-column">
+                <div id="currentBlueprintDisplay" class="blueprint-subtitle"></div>
+
+                <div class="canvas-container" id="canvasContainer" style="display: none;">
+                    <canvas id="blueprintCanvas" width="400" height="300">
+                        Your browser does not support HTML5 Canvas.
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="js/apimock.js"></script>
+    <script src="js/apiclient.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
 </html>

@@ -9,7 +9,16 @@
  *
  * @module app
  */
-var app = (function() {
+var app = (function () {
+
+    // ========== API CONFIGURATION ==========
+    /**
+     * Configure which API to use: apimock or apiclient
+     * Change this line to switch between mock data and real API
+     *
+     * @private
+     */
+    var api = apiclient;  // Change to apiclient when backend is ready
 
     /**
      * Private variable to store the currently selected author name.
@@ -34,7 +43,7 @@ var app = (function() {
      * @public
      * @param {string} authorName - The name of the author to set
      */
-    var setCurrentAuthor = function(authorName) {
+    var setCurrentAuthor = function (authorName) {
         currentAuthor = authorName;
     };
 
@@ -44,8 +53,66 @@ var app = (function() {
      * @public
      * @returns {string} The current author name
      */
-    var getCurrentAuthor = function() {
+    var getCurrentAuthor = function () {
         return currentAuthor;
+    };
+
+    /**
+     * Draws a blueprint on the canvas using HTML5 Canvas API.
+     * Retrieves the specific blueprint data and draws connected line segments.
+     *
+     * @public
+     * @param {string} authorName - The name of the author
+     * @param {string} blueprintName - The name of the blueprint to draw
+     */
+    var drawBlueprint = function (authorName, blueprintName) {
+        // Use the configured API (apimock or apiclient)
+        api.getBlueprintsByNameAndAuthor(authorName, blueprintName, function (blueprint) {
+            if (!blueprint) {
+                alert("Blueprint not found: " + blueprintName + " by " + authorName);
+                return;
+            }
+
+            // Show canvas section and update the current blueprint display
+            $("#canvasContainer").show();
+            $("#currentBlueprintDisplay").text("Current blueprint: " + blueprint.name);
+
+            // Get canvas and context
+            var canvas = document.getElementById("blueprintCanvas");
+            var ctx = canvas.getContext("2d");
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set drawing properties
+            ctx.strokeStyle = "#333";
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+
+            // Draw the blueprint points as connected lines
+            if (blueprint.points && blueprint.points.length > 0) {
+                ctx.beginPath();
+
+                // Move to the first point
+                ctx.moveTo(blueprint.points[0].x, blueprint.points[0].y);
+
+                // Draw lines to subsequent points
+                for (var i = 1; i < blueprint.points.length; i++) {
+                    ctx.lineTo(blueprint.points[i].x, blueprint.points[i].y);
+                }
+
+                ctx.stroke();
+
+                // Draw points as small circles for better visualization
+                ctx.fillStyle = "#666";
+                for (var j = 0; j < blueprint.points.length; j++) {
+                    ctx.beginPath();
+                    ctx.arc(blueprint.points[j].x, blueprint.points[j].y, 3, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+        });
     };
 
     /**
@@ -59,19 +126,21 @@ var app = (function() {
      * @public
      * @param {string} authorName - The author whose blueprints to retrieve
      */
-    var updateBlueprintsByAuthor = function(authorName) {
+    var updateBlueprintsByAuthor = function (authorName) {
         setCurrentAuthor(authorName);
-        apimock.getBlueprintsByAuthor(authorName, function(blueprints) {
+        api.getBlueprintsByAuthor(authorName, function (blueprints) {
             if (!blueprints || blueprints.length === 0) {
                 $("#blueprintsTableBody").empty();
-                $("#authorNameDisplay").html("<p class='text-warning'>No blueprints found for author: <strong>" + authorName + "</strong></p>");
+                $("#authorNameDisplay").text("No blueprints found for author: " + authorName);
                 $("#totalPointsDisplay").text("");
+                $("#tableContainer").show();
+                $("#canvasContainer").hide();
                 currentBlueprints = [];
                 return;
             }
 
             // Step 1: Transform blueprints to objects with name and number of points
-            currentBlueprints = blueprints.map(function(blueprint) {
+            currentBlueprints = blueprints.map(function (blueprint) {
                 return {
                     name: blueprint.name,
                     points: blueprint.points.length
@@ -81,27 +150,31 @@ var app = (function() {
             // Step 2: Clear existing table rows
             $("#blueprintsTableBody").empty();
 
-            // Display author name
-            $("#authorNameDisplay").html("<h3>" + authorName + "'s blueprints:</h3>");
+            // Show table container and display author name
+            $("#tableContainer").show();
+            $("#authorNameDisplay").text(authorName + "'s blueprints:");
 
             // Step 3: Add each blueprint as a row in the table
-            currentBlueprints.map(function(blueprint) {
+            currentBlueprints.map(function (blueprint) {
                 var row = "<tr>" +
                     "<td>" + blueprint.name + "</td>" +
                     "<td>" + blueprint.points + "</td>" +
-                    "<td><button class='btn btn-info btn-sm' onclick=\"alert('Open functionality coming soon!')\">Open</button></td>" +
+                    "<td><button class='blueprint-btn' " +
+                    "onclick=\"app.drawBlueprint('" + authorName + "', '" + blueprint.name + "')\">" +
+                    "Open" +
+                    "</button></td>" +
                     "</tr>";
 
                 $("#blueprintsTableBody").append(row);
             });
 
             // Step 4: Calculate total points using reduce
-            var totalPoints = currentBlueprints.reduce(function(accumulator, blueprint) {
+            var totalPoints = currentBlueprints.reduce(function (accumulator, blueprint) {
                 return accumulator + blueprint.points;
             }, 0);
 
             // Step 5: Update the total points display
-            $("#totalPointsDisplay").html("Total user points: <span class='text-primary'>" + totalPoints + "</span>");
+            $("#totalPointsDisplay").text("Total user points: " + totalPoints);
         });
     };
 
@@ -111,9 +184,9 @@ var app = (function() {
      *
      * @public
      */
-    var init = function() {
+    var init = function () {
         // Attach click event to the "Get blueprints" button
-        $("#getBlueprintsBtn").click(function() {
+        $("#getBlueprintsBtn").click(function () {
             var authorName = $("#authorInput").val().trim();
 
             if (authorName === "") {
@@ -125,7 +198,7 @@ var app = (function() {
         });
 
         // Allow pressing Enter in the input field to trigger search
-        $("#authorInput").keypress(function(event) {
+        $("#authorInput").keypress(function (event) {
             if (event.which === 13) { // Enter key
                 $("#getBlueprintsBtn").click();
             }
@@ -136,6 +209,7 @@ var app = (function() {
         setCurrentAuthor: setCurrentAuthor,
         getCurrentAuthor: getCurrentAuthor,
         updateBlueprintsByAuthor: updateBlueprintsByAuthor,
+        drawBlueprint: drawBlueprint,
         init: init
     };
 
@@ -143,6 +217,6 @@ var app = (function() {
 
 
 // Initialize the application when DOM is ready
-$(document).ready(function() {
+$(document).ready(function () {
     app.init();
 });

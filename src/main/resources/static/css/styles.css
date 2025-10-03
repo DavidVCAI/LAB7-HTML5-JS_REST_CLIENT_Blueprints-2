@@ -1,0 +1,207 @@
+/* Blueprint Management - Mockup Style */
+
+/* Global Styles */
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  margin-bottom: 20px;
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Search Row */
+.search-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.author-label {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  min-width: 50px;
+}
+
+.author-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+  font-family: inherit;
+}
+
+.author-input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.get-blueprints-btn {
+  padding: 8px 16px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.get-blueprints-btn:hover {
+  background-color: #d0d0d0;
+}
+
+/* Main Content Layout */
+.main-content {
+  display: flex;
+  gap: 30px;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.right-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Author Subtitle */
+.author-subtitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Table Styles */
+.table-container {
+  margin-bottom: 20px;
+}
+
+.blueprints-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+.blueprints-table th {
+  background-color: #f8f8f8;
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.blueprints-table td {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.blueprints-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.blueprints-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Action Button in Table */
+.blueprint-btn {
+  padding: 4px 8px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.blueprint-btn:hover {
+  background-color: #d0d0d0;
+}
+
+/* Total Points */
+.total-points {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #333;
+}
+
+/* Blueprint Subtitle */
+.blueprint-subtitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Canvas Container */
+.canvas-container {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: inline-block;
+}
+
+#blueprintCanvas {
+  border: 1px solid #999;
+  background: white;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .search-row {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .author-input {
+    width: 150px;
+  }
+
+  .blueprints-table {
+    font-size: 12px;
+  }
+
+  .blueprints-table th,
+  .blueprints-table td {
+    padding: 6px 8px;
+  }
+}
+
+/* Hidden states */
+.hidden {
+  display: none;
+}
