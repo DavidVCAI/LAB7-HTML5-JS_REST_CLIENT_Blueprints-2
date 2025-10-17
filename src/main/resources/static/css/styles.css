@@ -173,6 +173,64 @@ body {
   border: 1px solid #999;
   background: white;
   display: block;
+  cursor: crosshair;
+}
+
+#blueprintCanvas:hover {
+  border-color: #666;
+}
+
+/* Canvas Buttons */
+.canvas-buttons {
+  margin-top: 10px;
+  text-align: center;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.canvas-buttons .btn {
+  margin: 0 5px;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #449d44;
+  border-color: #398439;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
 }
 
 /* Responsive Design */

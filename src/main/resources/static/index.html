@@ -61,6 +61,13 @@
             <div class="right-column">
                 <div id="currentBlueprintDisplay" class="blueprint-subtitle"></div>
 
+                <!-- Canvas Action Buttons (outside canvas container so they're always visible when author is selected) -->
+                <div class="canvas-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn btn-success" id="saveUpdateBtn" style="display: none;">Save/Update</button>
+                    <button class="btn btn-primary" id="createNewBtn">Create new blueprint</button>
+                    <button class="btn btn-danger" id="deleteBtn" style="display: none;">DELETE</button>
+                </div>
+
                 <div class="canvas-container" id="canvasContainer" style="display: none;">
                     <canvas id="blueprintCanvas" width="400" height="300">
                         Your browser does not support HTML5 Canvas.

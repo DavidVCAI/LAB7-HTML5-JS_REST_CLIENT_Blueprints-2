@@ -158,4 +158,30 @@ public class BlueprintAPIController {
           HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  /**
+   * Handles DELETE requests to delete an existing blueprint.
+   * Deletes the blueprint identified by author and blueprint name.
+   *
+   * @param author the author of the blueprint to delete
+   * @param bpname the name of the blueprint to delete
+   * @return ResponseEntity with HTTP 202 ACCEPTED if successful, or error status
+   */
+  @RequestMapping(value = "/{author}/{bpname}", method = RequestMethod.DELETE)
+  public ResponseEntity<?> deleteBlueprint(@PathVariable String author, @PathVariable String bpname) {
+    try {
+      blueprintsServices.deleteBlueprint(author, bpname);
+      return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    } catch (BlueprintNotFoundException ex) {
+      Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+      return new ResponseEntity<>("Blueprint not found: " + author + "/" + bpname, HttpStatus.NOT_FOUND);
+    } catch (BlueprintPersistenceException ex) {
+      Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+      return new ResponseEntity<>("Error deleting blueprint: " + ex.getMessage(), HttpStatus.FORBIDDEN);
+    } catch (Exception ex) {
+      Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+      return new ResponseEntity<>("Error deleting blueprint: " + ex.getMessage(),
+          HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

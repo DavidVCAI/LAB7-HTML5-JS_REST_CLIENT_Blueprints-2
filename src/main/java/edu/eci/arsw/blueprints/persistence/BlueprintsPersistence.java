@@ -65,4 +65,16 @@ public interface BlueprintsPersistence {
    * @throws BlueprintPersistenceException if any other persistence error occurs
    */
   public void updateBlueprint(Blueprint blueprint) throws BlueprintNotFoundException, BlueprintPersistenceException;
+
+  /**
+   * Deletes a specific blueprint from the persistence layer.
+   *
+   * @param author        the blueprint's author
+   * @param blueprintName the blueprint's name
+   * @throws BlueprintNotFoundException    if the blueprint to delete doesn't
+   *                                       exist
+   * @throws BlueprintPersistenceException if any other persistence error occurs
+   */
+  public void deleteBlueprint(String author, String blueprintName)
+      throws BlueprintNotFoundException, BlueprintPersistenceException;
 }

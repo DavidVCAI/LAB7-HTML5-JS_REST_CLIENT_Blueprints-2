@@ -91,7 +91,6 @@ var apiclient = (function () {
       type: 'POST',
       data: JSON.stringify(blueprint),
       contentType: "application/json; charset=utf-8",
-      dataType: "json",
       success: function (data) {
         console.log("Successfully created blueprint: " + blueprint.name);
         callback(true, data);
@@ -125,7 +124,6 @@ var apiclient = (function () {
       type: 'PUT',
       data: JSON.stringify(blueprint),
       contentType: "application/json; charset=utf-8",
-      dataType: "json",
       success: function (data) {
         console.log("Successfully updated blueprint: " + bpname);
         callback(true, data);
@@ -144,12 +142,43 @@ var apiclient = (function () {
     });
   };
 
+  /**
+   * Deletes an existing blueprint via DELETE request to the REST API.
+   *
+   * @public
+   * @param {string} authname - The author name
+   * @param {string} bpname - The blueprint name
+   * @param {function} callback - Callback function that receives the result
+   */
+  var deleteBlueprint = function (authname, bpname, callback) {
+    $.ajax({
+      url: BASE_URL + "/" + authname + "/" + bpname,
+      type: 'DELETE',
+      success: function (data) {
+        console.log("Successfully deleted blueprint: " + bpname + " by " + authname);
+        callback(true, data);
+      },
+      error: function (xhr, status, error) {
+        console.error("Error deleting blueprint: " + bpname + " by " + authname);
+        console.error("Status: " + status + ", Error: " + error);
+
+        if (xhr.status === 404) {
+          alert("Blueprint not found: " + bpname + " by " + authname);
+        } else {
+          alert("Error deleting blueprint. Please try again later.");
+        }
+        callback(false, null);
+      }
+    });
+  };
+
   // Public API - same interface as apimock
   return {
     getBlueprintsByAuthor: getBlueprintsByAuthor,
     getBlueprintsByNameAndAuthor: getBlueprintsByNameAndAuthor,
     createBlueprint: createBlueprint,
-    updateBlueprint: updateBlueprint
+    updateBlueprint: updateBlueprint,
+    deleteBlueprint: deleteBlueprint
   };
 
 })();
