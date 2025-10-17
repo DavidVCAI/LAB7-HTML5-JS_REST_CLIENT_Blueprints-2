@@ -27,7 +27,7 @@ This project implements a comprehensive **Blueprints Management System** built w
 This project is documented in two main parts:
 
 ### 📋 **Part I: Foundation Implementation**
-**Document:** [README_PART_1.md](README_PART_1.md)
+**Document:** [README_FRONTEND_1.md](README_FRONTEND_1)
 
 **Covers:**
 - ✅ Project setup and architecture design
@@ -39,7 +39,7 @@ This project is documented in two main parts:
 - ✅ Initial canvas drawing implementation
 
 ### 📋 **Part II: Interactive Enhancement**
-**Document:** [README_PART_2.md](README_PART_2.md)
+**Document:** [README_FRONTEND_2.md](README_FRONTEND_2)
 
 **Covers:**
 - ✅ HTML5 Canvas pointer events and cross-platform compatibility
@@ -186,9 +186,8 @@ This project successfully demonstrates:
 
 ## 📝 **Additional Resources**
 
-- **Screenshot Guide:** [SCREENSHOT_GUIDE.md](SCREENSHOT_GUIDE.md) - Detailed guide for capturing project screenshots
-- **Part I Documentation:** [README_PART_1.md](README_PART_1.md) - Foundation implementation details
-- **Part II Documentation:** [README_PART_2.md](README_PART_2.md) - Interactive enhancement details
+- **Part I Documentation:** [README_FRONTEND_1.md](README_FRONTEND_1) - Foundation implementation details
+- **Part II Documentation:** [README_FRONTEND_2.md](README_FRONTEND_2) - Interactive enhancement details
 
 ---
 

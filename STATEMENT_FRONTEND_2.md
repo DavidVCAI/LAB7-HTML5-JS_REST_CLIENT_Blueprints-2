@@ -1,8 +1,6 @@
-#### Escuela Colombiana de Ingeniería
-#### Procesos de desarrollo de software - PDSW
-#### Construción de un cliente 'grueso' con un API REST, HTML5, Javascript y CSS3. Parte II.
-
-
+# Escuela Colombiana de Ingeniería
+## Arquitecturas de Software (ARSW)
+### Construción de un cliente 'grueso' con un API REST, HTML5, Javascript y CSS3. Parte II
 
 ![](assets/images/mock2.png)
 
